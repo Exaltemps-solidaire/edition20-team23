@@ -39,7 +39,7 @@
 }
 
 .dot.fait {
-  background: var(--lb-rouge);
+  background: var(--lb-rouge-700);
 }
 
 .dot.fait::after {
@@ -51,7 +51,7 @@
 
 .dot.en-cours {
   background: var(--lb-blanc);
-  border: 3px solid var(--lb-rouge);
+  border: 3px solid var(--lb-rouge-700);
 }
 
 .dot.suivant {
@@ -68,7 +68,7 @@
 
 .cardActive {
   background: var(--lb-blanc);
-  border: 2px solid var(--lb-rouge);
+  border: 2px solid var(--lb-rouge-700);
   box-shadow: var(--lb-ombre);
 }
 
@@ -146,7 +146,7 @@
 
 .progFill {
   height: 100%;
-  background: var(--lb-rouge);
+  background: var(--lb-rouge-700);
   border-radius: 3px;
 }
 

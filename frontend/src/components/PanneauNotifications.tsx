@@ -59,9 +59,11 @@ export function PanneauNotifications({
   }, [onFermer]);
 
   return (
-    <div className={styles.panel} role="dialog" aria-modal="true" aria-label="Notifications">
+    <div className={styles.panel} role="dialog" aria-modal="true" aria-labelledby="panneau-titre">
       <div className={styles.box}>
-        <div className={styles.titre}>Tes rappels à venir 🔔</div>
+        <h2 id="panneau-titre" className={styles.titre}>
+          Tes rappels à venir 🔔
+        </h2>
         <div className={styles.desc}>
           Ces notifications sont envoyées automatiquement.
           <br />
@@ -69,17 +71,19 @@ export function PanneauNotifications({
         </div>
 
         {rappels.length > 0 ? (
-          rappels.map((rappel) => (
-            <div key={`${rappel.module}-${rappel.titre}`} className={styles.item}>
-              <div className={`${styles.dot} ${rappel.inscrite ? styles.dotInscrite : ""}`} />
-              <div className={styles.texte}>
-                <div className={styles.titreItem}>
-                  {rappel.titre} – {rappel.module}
+          <ul className={styles.liste}>
+            {rappels.map((rappel) => (
+              <li key={`${rappel.module}-${rappel.titre}`} className={styles.item}>
+                <div className={`${styles.dot} ${rappel.inscrite ? styles.dotInscrite : ""}`} />
+                <div className={styles.texte}>
+                  <div className={styles.titreItem}>
+                    {rappel.titre} – {rappel.module}
+                  </div>
+                  <div className={styles.statut}>{rappel.inscrite ? "Inscrite" : "Pas encore inscrite"}</div>
                 </div>
-                <div className={styles.statut}>{rappel.inscrite ? "Inscrite" : "Pas encore inscrite"}</div>
-              </div>
-            </div>
-          ))
+              </li>
+            ))}
+          </ul>
         ) : (
           <div className={styles.neutre}>Aucun rappel pour l&apos;instant, profite de ton rythme 🌿</div>
         )}

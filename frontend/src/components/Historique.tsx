@@ -9,11 +9,11 @@ export function BlocHistorique({ historique }: { historique: Historique }) {
       </div>
       <div className={styles.ligne}>
         ✓ Parcours terminés :{" "}
-        {historique.parcoursTermines.length > 0 ? historique.parcoursTermines.join(", ") : "aucun pour l'instant"}
+        {historique.parcoursTermines.length > 0 ? historique.parcoursTermines.join(", ") : "Aucun pour l'instant."}
       </div>
       <div className={styles.ligne}>
         🌱 Parcours en cours :{" "}
-        {historique.parcoursEnCours.length > 0 ? historique.parcoursEnCours.join(", ") : "aucun pour l'instant"}
+        {historique.parcoursEnCours.length > 0 ? historique.parcoursEnCours.join(", ") : "Aucun pour l'instant."}
       </div>
     </div>
   );

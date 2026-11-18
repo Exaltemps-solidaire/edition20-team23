@@ -13,7 +13,7 @@
 
 .item {
   background: var(--lb-rose-pale);
-  border-radius: 14px;
+  border-radius: 12px;
   padding: 12px 16px;
   font-size: 13px;
   color: var(--lb-noir);
@@ -22,7 +22,7 @@
 
 .neutre {
   background: var(--lb-gris-50);
-  border-radius: 14px;
+  border-radius: 12px;
   padding: 12px 16px;
   font-size: 13px;
   color: var(--lb-gris-500);

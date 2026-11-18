@@ -1,7 +1,7 @@
 .bloc {
   margin: 8px 16px 16px 16px;
   background: var(--lb-gris-50);
-  border-radius: 16px;
+  border-radius: 12px;
   padding: 14px 18px;
   display: flex;
   flex-direction: column;

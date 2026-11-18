@@ -19,49 +19,55 @@ export default function Home() {
 
   return (
     <div className={styles.screen}>
-      <header className={styles.header}>
-        <span className={styles.headerLogo}>L&apos;BURN</span>
-        <button
-          className={styles.cloche}
-          type="button"
-          onClick={() => setPanneauOuvert(true)}
-          aria-label="Ouvrir les notifications"
-        >
-          🔔
-        </button>
-        <select
-          className={styles.personaSelect}
-          value={personaId}
-          onChange={(e) => setPersonaId(e.target.value)}
-          aria-label="Choisir l'utilisatrice à incarner"
-        >
-          {personae.map((p) => (
-            <option key={p.id} value={p.id}>
-              {p.nom}
-            </option>
-          ))}
-        </select>
-      </header>
+      <div className={styles.contenu} inert={panneauOuvert}>
+        <header className={styles.header}>
+          <div className={styles.headerGauche}>
+            <span className={styles.headerLogo}>L&apos;BURN</span>
+            <button
+              className={styles.cloche}
+              type="button"
+              onClick={() => setPanneauOuvert(true)}
+              aria-label="Ouvrir les notifications"
+            >
+              🔔
+            </button>
+          </div>
+          <select
+            className={styles.personaSelect}
+            value={personaId}
+            onChange={(e) => setPersonaId(e.target.value)}
+            aria-label="Choisir l'utilisatrice à incarner"
+          >
+            {personae.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.nom}
+              </option>
+            ))}
+          </select>
+        </header>
 
-      <div className={styles.bienvenue}>
-        <div className={styles.bienvenueLabel}>Bonjour</div>
-        <div className={styles.bienvenueTitre}>Bienvenue, {persona.nom} 🌿</div>
-        <div className={styles.bienvenueTexte}>
-          Tu peux reprendre là où tu t&apos;es arrêtée, à ton rythme, sans pression.
+        <div className={styles.bienvenue}>
+          <div className={styles.bienvenueLabel}>Bonjour</div>
+          <h1 className={styles.bienvenueTitre}>Bienvenue, {persona.nom} 🌿</h1>
+          <div className={styles.bienvenueTexte}>
+            Tu peux reprendre là où tu t&apos;es arrêtée, à ton rythme, sans pression.
+          </div>
+          <span className={styles.derniereCo}>
+            🕐 Dernière connexion il y a {persona.derniereConnexionJours} jours
+          </span>
         </div>
-        <span className={styles.derniereCo}>
-          🕐 Dernière connexion il y a {persona.derniereConnexionJours} jours
-        </span>
+
+        <h2 className={styles.sectionTitre}>Ton parcours</h2>
+        <Timeline modules={persona.modules} />
+
+        <h2 className={styles.sectionTitre}>Ton historique</h2>
+        <BlocHistorique historique={historiquePersona(persona)} />
+
+        <h2 className={styles.sectionTitre}>Pour toi</h2>
+        <BlocSuggestions suggestions={suggestionsPersona(persona)} />
+
+        <footer className={styles.footer}>Version {APP_VERSION}</footer>
       </div>
-
-      <div className={styles.sectionTitre}>Ton parcours</div>
-      <Timeline modules={persona.modules} />
-
-      <div className={styles.sectionTitre}>Ton historique</div>
-      <BlocHistorique historique={historiquePersona(persona)} />
-
-      <div className={styles.sectionTitre}>Pour toi</div>
-      <BlocSuggestions suggestions={suggestionsPersona(persona)} />
 
       {panneauOuvert && (
         <PanneauNotifications
@@ -71,8 +77,6 @@ export default function Home() {
           onFermer={() => setPanneauOuvert(false)}
         />
       )}
-
-      <footer className={styles.footer}>Version {APP_VERSION}</footer>
     </div>
   );
 }
