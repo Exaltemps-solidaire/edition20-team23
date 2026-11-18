@@ -75,7 +75,27 @@
   - Reporté : rien. Pas de personnalisation plus fine que la règle simple (hors périmètre explicite de l'itération).
   - Rien bloqué par le harnais.
 
+## Itération 4 : Panneau de notifications consenties
+
+- **Dans le périmètre** : une cloche dans l'en-tête ouvre un panneau listant les rappels à venir (ateliers non faits de la persona), avec un bouton « Recevoir ces rappels par e-mail » qui confirme l'activation (`Rappels activés ✓`) et un bouton « Pas maintenant » qui ferme le panneau. État d'activation en mémoire (pas de persistance, pas d'appel réseau — le consentement se gère uniquement depuis ce panneau, l'opt-in au premier lancement est hors périmètre selon la passation).
+- **Hors périmètre** : envoi réel par e-mail (Brevo/Make), persistance du consentement entre sessions, dates réelles des ateliers (rappels dérivés de l'ordre des ateliers non faits, pas d'un vrai calendrier).
+- **Critères d'acceptation** :
+  - Étant donné le tableau de bord, quand on clique sur la cloche, alors le panneau de notifications s'ouvre avec la liste des rappels à venir de la persona sélectionnée (ou un message neutre si aucun rappel).
+  - Étant donné le panneau ouvert, quand on clique « Recevoir ces rappels par e-mail », alors le bouton confirme l'activation (texte « Rappels activés ✓ »), sans aucune action d'équipe ni appel réseau.
+  - Étant donné le panneau ouvert, quand on clique « Pas maintenant », alors le panneau se ferme sans modifier l'état d'activation.
+- **Hypothèses de l'équipe couvertes** : « notifications automatiques et consenties, pas de perte de fil entre deux connexions » et « 0 action manuelle de l'équipe par envoi » — ce dernier point est structurellement vrai ici (aucun outil d'équipe n'intervient, tout est dérivé automatiquement des données).
+- **Codage estimé** : 8 minutes.
+- **Fichiers prévus** : `frontend/src/lib/rappels.ts` (règle de dérivation, pure, nouveau), `frontend/src/components/PanneauNotifications.tsx` + `.module.css` (nouveau), `frontend/src/app/page.tsx` (cloche + état d'ouverture/activation).
+- **Tests unitaires prévus** : 2 à 3, sur `rappelsPersona` (cas normal, cas limite sans atelier restant).
+- **Étapes ajoutées à la démo** : ouvrir le panneau via la cloche, cliquer « Recevoir ces rappels par e-mail », vérifier la confirmation.
+- **Bilan** :
+  - Codage réel : <1 minute, largement sous le budget de 8 min annoncé. Pas d'alarme déclenchée.
+  - Les 3 critères d'acceptation sont satisfaits : la cloche ouvre le panneau avec la liste des rappels (ateliers non faits, 3 au plus) ; « Recevoir ces rappels par e-mail » bascule en « Rappels activés ✓ » sans appel réseau ni action d'équipe ; « Pas maintenant » ferme le panneau sans toucher à l'état d'activation.
+  - Fichiers modifiés/créés : `frontend/src/lib/rappels.ts` (règle de dérivation pure, nouveau), `frontend/src/lib/rappels.test.ts` (3 tests, nouveau), `frontend/src/components/PanneauNotifications.tsx` + `.module.css` (nouveau), `frontend/src/app/page.tsx` (cloche + état d'ouverture/activation), `frontend/src/app/page.module.css` (style de la cloche).
+  - Déployé (frontend seul rebuild) et vérifié : `localhost:8080/` répond `200` et affiche la cloche ; `/health`/`/sante` toujours `200` sur les deux services. Version 4 signalée à PM Lab avec succès.
+  - Reporté : envoi réel par e-mail (Brevo/Make), persistance du consentement entre sessions — explicitement hors périmètre de cette itération et de la passation (opt-in initial hors périmètre).
+  - Rien bloqué par le harnais.
+
 ## À venir
 
-1. Panneau de notifications consenties (cloche en haut, activation/désactivation, envoi simulé sans action manuelle d'équipe) — couvre les deux hypothèses restantes (fil non perdu entre deux connexions ; 0 action manuelle d'équipe).
-2. Stabilisation finale pour le pitch (si le temps restant ne permet plus qu'une itération).
+1. Stabilisation finale pour le pitch (si le temps restant ne permet plus qu'une itération).

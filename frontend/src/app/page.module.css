@@ -25,6 +25,14 @@
   letter-spacing: -0.5px;
 }
 
+.cloche {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+}
+
 .personaSelect {
   font-family: var(--lb-font-texte);
   font-size: 13px;
