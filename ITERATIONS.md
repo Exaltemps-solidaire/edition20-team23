@@ -67,7 +67,13 @@
 - **Fichiers prévus** : `frontend/src/components/Suggestions.tsx` (nouveau), `frontend/src/lib/suggestions.ts` (règle de sélection, pure et testable, nouveau), `frontend/src/data/personae.ts`, `frontend/src/app/page.tsx`.
 - **Tests unitaires prévus** : 2 à 3, sur `frontend/src/lib/suggestions.ts` (règle de sélection, cas limite sans suggestion).
 - **Étapes ajoutées à la démo** : vérifier la zone suggestions.
-- **Bilan** : _à remplir en fin d'itération (durée de codage réelle, dépassement éventuel, fait, reporté, modifications fichier par fichier)_
+- **Bilan** :
+  - Codage réel : <1 minute, largement sous le budget. Pas d'alarme déclenchée.
+  - Les 3 critères d'acceptation sont satisfaits : au moins une suggestion pertinente par persona (module en cours → atelier suivant, sinon module suivant → thématique d'entrée), message neutre sans zone vide quand aucune suggestion ne s'applique (cas limite couvert par un test), suggestion lisible en langage clair sans jargon.
+  - Fichiers modifiés/créés : `frontend/src/lib/suggestions.ts` (règle de sélection pure, nouveau), `frontend/src/lib/suggestions.test.ts` (3 tests, nouveau), `frontend/src/components/Suggestions.tsx` + `.module.css` (nouveau), `frontend/src/app/page.tsx` (intégration).
+  - Déployé (frontend seul rebuild) et vérifié : `localhost:8080/` répond `200` et affiche le bloc « Pour toi » avec la suggestion attendue pour Sofia ; `/health`/`/sante` toujours `200` sur les deux services. Version 3 signalée à PM Lab avec succès.
+  - Reporté : rien. Pas de personnalisation plus fine que la règle simple (hors périmètre explicite de l'itération).
+  - Rien bloqué par le harnais.
 
 ## À venir
 

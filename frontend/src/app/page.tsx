@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { Timeline } from "@/components/Timeline";
 import { BlocHistorique } from "@/components/Historique";
+import { BlocSuggestions } from "@/components/Suggestions";
 import { historiquePersona, personae, trouverPersona } from "@/data/personae";
+import { suggestionsPersona } from "@/lib/suggestions";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -44,6 +46,9 @@ export default function Home() {
 
       <div className={styles.sectionTitre}>Ton historique</div>
       <BlocHistorique historique={historiquePersona(persona)} />
+
+      <div className={styles.sectionTitre}>Pour toi</div>
+      <BlocSuggestions suggestions={suggestionsPersona(persona)} />
     </div>
   );
 }
