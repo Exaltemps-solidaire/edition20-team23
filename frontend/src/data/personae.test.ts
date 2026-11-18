@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { progressionModule, trouverPersona } from "./personae";
-import type { Module } from "./personae";
+import { historiquePersona, progressionModule, trouverPersona } from "./personae";
+import type { Module, Persona } from "./personae";
 
 describe("trouverPersona", () => {
   it("retrouve une persona existante par son id", () => {
@@ -39,5 +39,33 @@ describe("progressionModule", () => {
       ateliers: [],
     };
     expect(progressionModule(unModule)).toBe(0);
+  });
+});
+
+describe("historiquePersona", () => {
+  const persona: Persona = {
+    id: "test",
+    nom: "Test",
+    role: "role",
+    derniereConnexionJours: 5,
+    modules: [
+      { cycle: "BBA", numero: 1, nom: "Module fait", thematiques: [], etat: "fait", ateliers: [] },
+      { cycle: "BBA", numero: 2, nom: "Module en cours", thematiques: [], etat: "en-cours", ateliers: [] },
+      { cycle: "BBA", numero: 3, nom: "Module suivant", thematiques: [], etat: "suivant", ateliers: [] },
+    ],
+  };
+
+  it("sépare les modules terminés et en cours", () => {
+    expect(historiquePersona(persona)).toEqual({
+      derniereConnexionJours: 5,
+      parcoursTermines: ["Module fait"],
+      parcoursEnCours: ["Module en cours"],
+    });
+  });
+
+  it("renvoie des listes vides sans modules terminés ni en cours (cas limite)", () => {
+    const sansProgres: Persona = { ...persona, modules: [persona.modules[2]] };
+    expect(historiquePersona(sansProgres).parcoursTermines).toEqual([]);
+    expect(historiquePersona(sansProgres).parcoursEnCours).toEqual([]);
   });
 });

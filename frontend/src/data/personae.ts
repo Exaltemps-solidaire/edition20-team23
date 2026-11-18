@@ -83,3 +83,17 @@ export function progressionModule(module: Module): number {
   const faits = module.ateliers.filter((a) => a.fait).length;
   return Math.round((faits / module.ateliers.length) * 100);
 }
+
+export type Historique = {
+  derniereConnexionJours: number;
+  parcoursTermines: string[];
+  parcoursEnCours: string[];
+};
+
+export function historiquePersona(persona: Persona): Historique {
+  return {
+    derniereConnexionJours: persona.derniereConnexionJours,
+    parcoursTermines: persona.modules.filter((m) => m.etat === "fait").map((m) => m.nom),
+    parcoursEnCours: persona.modules.filter((m) => m.etat === "en-cours").map((m) => m.nom),
+  };
+}

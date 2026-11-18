@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Timeline } from "@/components/Timeline";
-import { personae, trouverPersona } from "@/data/personae";
+import { BlocHistorique } from "@/components/Historique";
+import { historiquePersona, personae, trouverPersona } from "@/data/personae";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -40,6 +41,9 @@ export default function Home() {
 
       <div className={styles.sectionTitre}>Ton parcours</div>
       <Timeline modules={persona.modules} />
+
+      <div className={styles.sectionTitre}>Ton historique</div>
+      <BlocHistorique historique={historiquePersona(persona)} />
     </div>
   );
 }

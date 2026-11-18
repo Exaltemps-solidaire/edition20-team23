@@ -46,7 +46,13 @@
 - **Fichiers prévus** : `frontend/src/components/Historique.tsx` (nouveau), `frontend/src/data/personae.ts` (étoffé), `frontend/src/app/page.tsx` (intégration).
 - **Tests unitaires prévus** : 1 à 2, sur la fonction qui dérive les trois champs de l'historique depuis les données personae.
 - **Étapes ajoutées à la démo** : vérifier la présence de l'historique sous la timeline.
-- **Bilan** : _à remplir en fin d'itération (durée de codage réelle, dépassement éventuel, fait, reporté, modifications fichier par fichier)_
+- **Bilan** :
+  - Codage réel : <1 minute, largement sous le budget. Pas d'alarme déclenchée.
+  - Les 3 critères d'acceptation sont satisfaits : bloc historique (dernière connexion, parcours terminés, parcours en cours) sous la timeline, libellés sans formulation de pression, change avec la persona sélectionnée (fonction pure dérivée des données).
+  - Fichiers modifiés/créés : `frontend/src/data/personae.ts` (fonction pure `historiquePersona`, ajoutée), `frontend/src/data/personae.test.ts` (2 tests ajoutés, 8 au total), `frontend/src/components/Historique.tsx` + `.module.css` (nouveau), `frontend/src/app/page.tsx` (intégration).
+  - Déployé (frontend seul rebuild, l'API n'a pas changé) et vérifié : `localhost:8080/` répond `200` et affiche le bloc historique ; `/health` et `/sante` toujours `200` sur les deux services. Version 2 signalée à PM Lab avec succès.
+  - Reporté : rien. Note : la dernière connexion apparaît aussi dans le bloc « Bienvenue » (itération 1) — redondance mineure, pas retirée pour rester dans le périmètre de cette itération.
+  - Rien bloqué par le harnais.
 
 ## Itération 3 : Suggestions en bas de la timeline
 
