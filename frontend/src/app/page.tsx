@@ -37,7 +37,7 @@ export default function Home() {
         >
           {personae.map((p) => (
             <option key={p.id} value={p.id}>
-              {p.nom} · {p.role}
+              {p.nom}
             </option>
           ))}
         </select>
