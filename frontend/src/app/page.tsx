@@ -8,6 +8,7 @@ import { PanneauNotifications } from "@/components/PanneauNotifications";
 import { historiquePersona, personae, trouverPersona } from "@/data/personae";
 import { suggestionsPersona } from "@/lib/suggestions";
 import { rappelsPersona } from "@/lib/rappels";
+import { APP_VERSION } from "@/lib/version";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -70,6 +71,8 @@ export default function Home() {
           onFermer={() => setPanneauOuvert(false)}
         />
       )}
+
+      <footer className={styles.footer}>Version {APP_VERSION}</footer>
     </div>
   );
 }
